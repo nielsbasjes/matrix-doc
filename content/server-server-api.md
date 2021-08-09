@@ -134,6 +134,13 @@ to send. The process overall is as follows:
     8448 and a `Host` header containing the `<hostname>`. The target
     server must present a valid certificate for `<hostname>`.
 
+The specific hostname (either the `<hostname>` or `<delegated_hostname>`)
+for which the target server must provide a valid certificate depends mainly
+on the trustworthiness of the route how this hostname has been obtained.
+DNS is insecure (too many domains do not have DNSSEC) so any SRV records
+pointing to a `<delegated_hostname>` remains untrusted until this system
+proves via TLS it is truly a delegate for `<hostname>`.
+
 The TLS certificate provided by the target server must be signed by a
 known Certificate Authority. Servers are ultimately responsible for
 determining the trusted Certificate Authorities, however are strongly
